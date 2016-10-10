@@ -40,6 +40,8 @@ Actually, might move this to a function at some point.
 these were tested with a single active cell in the middle (using showSimulation),
 might yield cool results with randomSimulation as well though.
 
+(if you don't want to/aren't able to try these out on your machine, you can still see some results in coolResults.md)
+
 ### 3 ancestors:
 
 * 73
