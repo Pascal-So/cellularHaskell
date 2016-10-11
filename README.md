@@ -3,7 +3,7 @@ cellular automata in haskell
 
 ## Usage
 
-(try zooming out your terminal)
+Try zooming out your terminal for better results.
 
 `ghci filename.hs`
 
@@ -32,6 +32,12 @@ This might not work on every system (because of the sleep command, which might n
 very portable..)
 Again, using a lambda to have the rule number on the end where I can quickly edit it.
 Actually, might move this to a function at some point.
+
+For running the simulation with a random rule, use this:
+```Haskell
+randomRIO (1, 127) >>= (\x -> putStr $ (show x) ++ "\n" ++ showSimulation 90 x (initState 150))
+```
+This will print a simulation starting from a single active cell in the middle, using a random rule between 1 and 127 inclusive. For 5 ancestors, use `randomRIO (1,2147483647)` and for 7 ancestors use `randomRIO (1,170141183460469231731687303715884105727)`. We don't need to include the second half, because the second half should be equivalent to the first due to symmetry.
 
 
 ## cool rules

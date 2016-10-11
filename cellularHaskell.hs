@@ -22,6 +22,7 @@ might yield cool results with randomSimulation as well though.
 131 -> inv. shaded cone
 150
 169
+182 -> filled in sierpinsky
 225
 
 5 ancestors:
