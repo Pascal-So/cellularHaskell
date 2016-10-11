@@ -78,7 +78,7 @@ ancestors = 3
 --   vertical length of the simulation (nr. of steps)
 --   nr of rule to use
 --   the width of the simulation
-randomSimulation :: Int -> Int -> Int -> IO ()
+randomSimulation :: Int -> Integer -> Int -> IO ()
 randomSimulation len rule width = (fmap (showSimulation len rule) $ getRandomState width) >>= putStr
 
 -- returns a random state in an IO monad.
@@ -106,7 +106,7 @@ initState n = (replicate n False) ++ [True] ++ (replicate n False)
 --   vertical length of the simulation (nr. of steps)
 --   nr of rule to use
 --   the initial state
-showSimulation :: Int -> Int -> [Bool] -> String
+showSimulation :: Int -> Integer -> [Bool] -> String
 showSimulation len rule state = unlines $ map showState $ take len $ simulate rule state
 
 -- returns an infinite list of states.
@@ -114,7 +114,7 @@ showSimulation len rule state = unlines $ map showState $ take len $ simulate ru
 -- arguments:
 --   nr of rule to use
 --   the initial state
-simulate :: Int -> [Bool] -> [[Bool]]
+simulate :: Integer -> [Bool] -> [[Bool]]
 simulate rule init = iterate (nextState rule) init
 
 -- convert a single state (1 line) to a string
@@ -130,7 +130,7 @@ showState = map f
 -- arguments:
 --   nr of rule to use
 --   the current state
-nextState :: Int -> [Bool] -> [Bool]
+nextState :: Integer -> [Bool] -> [Bool]
 nextState rule current = map (translate rule) $ toNlets ancestors current
 
 -- returns a single Bool given its ancestors and the rule
@@ -138,7 +138,7 @@ nextState rule current = map (translate rule) $ toNlets ancestors current
 -- arguments:
 --   nr of rule to use
 --   the list of ancestors
-translate :: Int -> [Bool] -> Bool
+translate :: Integer -> [Bool] -> Bool
 translate rule nlet = (reverse (decToBin rule) ++ repeat False) !! binToDec nlet
 
 -- returns a list of lists of bools, which I, for the purposes
@@ -147,7 +147,7 @@ translate rule nlet = (reverse (decToBin rule) ++ repeat False) !! binToDec nlet
 -- transformation
 --
 -- arguments:
---   nr of rule to use
+--   n - amount of ancestors to group
 --   current state
 toNlets :: Int -> [a] -> [[a]]
 toNlets n a =
@@ -170,7 +170,7 @@ wrap n a = (drop (len - n) a) ++ a ++ (take n a)
 
 
 -- convert from decimal to Bool aray (big endian)
-decToBin :: Int -> [Bool]
+decToBin :: Integer -> [Bool]
 decToBin x = map (==1) $ reverse $ decToBin' x
   where
     decToBin' 0 = []
