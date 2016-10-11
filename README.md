@@ -33,7 +33,7 @@ very portable..)
 Again, using a lambda to have the rule number on the end where I can quickly edit it.
 Actually, might move this to a function at some point.
 
-For running the simulation with a random rule, use this:
+For running the **simulation with a random rule**, use this:
 ```Haskell
 randomRIO (1, 127) >>= (\x -> putStr $ (show x) ++ "\n" ++ showSimulation 90 x (initState 150))
 ```
